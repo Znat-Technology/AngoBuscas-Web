@@ -26,7 +26,7 @@
             </q-input>
             <div class="text-caption text-red text-center">
                <router-link
-                  to="/utilizadores">
+                  to="/utilizador">
                   Esqueceu a sua palavra passe?
                 </router-link>
             </div>
@@ -45,9 +45,10 @@
 </template>
 
 <script>
+import { notifies } from '../controllers/notifies'
 import { userController } from '../controllers/userController'
 export default {
-  mixins: [userController],
+  mixins: [userController, notifies],
   data () {
     return {
       loginData: {
@@ -67,20 +68,13 @@ export default {
           Object.keys(user.data).forEach(keyUser => {
             this.$q.sessionStorage.set(keyUser, user.data[keyUser])
           })
-          let goToPage = '/dashboard'
-          goToPage = (this.hasPermissionPage(goToPage)) ? goToPage : '/perfil'
+          let goToPage = 'dashboard'
+          goToPage = (this.hasPermissionPage(goToPage)) ? `/${goToPage}` : '/utilizador/perfil'
           this.$router.push(goToPage)
         })
         .catch(() => {
-          this.showNotify('Utilizador nao encontrado')
+          this.showNotify({ message: 'Utilizador nao encontrado', color: 'red', icon: 'warning' })
         })
-    },
-    showNotify (message) {
-      this.$q.notify({
-        message: message,
-        icon: 'warning',
-        color: 'primary'
-      })
     }
   }
 }

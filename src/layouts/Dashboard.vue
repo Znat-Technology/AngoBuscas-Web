@@ -4,7 +4,29 @@
         <q-toolbar>
           <q-btn class="small-screen-only" flat @click="drawer = !drawer" round color="red" dense icon="eva-menu" />
           <q-space/>
-           <q-btn class="q-mx-xs" round to="/perfil" flat>
+                     <q-btn class="q-mx-xs" round to="/submissao" flat>
+              <q-item>
+                  <q-avatar color="white" size="35px">
+                    <q-icon color="grey" name="cloud_upload" size="sm"></q-icon>
+                  <q-badge color="red" rounded floating>4</q-badge>
+                  </q-avatar>
+                    <q-tooltip :offset="[0, 0]">
+                     Submissao
+                  </q-tooltip>
+              </q-item>
+            </q-btn>
+              <q-btn class="q-mx-xs" round to="/categoria" flat>
+              <q-item>
+                  <q-avatar color="white" size="35px">
+                    <q-icon color="grey" name="category" size="sm"></q-icon>
+                  </q-avatar>
+                    <q-tooltip :offset="[0, 0]">
+                     Categorias
+                  </q-tooltip>
+              </q-item>
+            </q-btn>
+            <q-separator spaced vertical/>
+           <q-btn class="q-mx-xs" round to="/utilizador/perfil" flat>
               <q-item>
                   <q-avatar v-if="profile.profile !== ''" size="28px">
                     <img style="width:100%;height:100%" :src="profile.profile">
@@ -62,7 +84,7 @@
                           dense
                           exact
                           clickable
-                          :to="item.to"
+                          :to="{path: item.to}"
                           @click="link=item.label"
                           :active="link === item.label"
                           v-ripple
@@ -81,7 +103,7 @@
                 :key="index"
                 clickable
                 exact
-                :to="menuItem.to"
+                :to="{path: menuItem.to}"
                 class="text-white text-weight-thin"
                 active-class="option-active"
                 @click="changeOption(menuItem.label)"
@@ -109,14 +131,12 @@
                   {{ 'Sair' }}
                 </q-item-section>
               </q-item>
-
           </q-list>
         </q-scroll-area>
       </q-drawer>
       <q-footer>
-         <div class="large-screen-only text-center bg-white text-grey-8">
+         <div class="large-screen-only q-pa-md text-center bg-white text-grey-8">
            © {{ new Date().getFullYear() }} AngoBuscas by Znat Technology
-           <q-btn label="Ok" @click="show()"/>
          </div>
       </q-footer>
     <q-page-container>
@@ -130,52 +150,73 @@ import { userController } from '../controllers/userController'
 
 const menuList = [
   {
-    icon: 'eva-grid-outline',
-    label: 'Painel de controle',
-    active: 'Painel de controle',
-    separator: true,
-    to: 'dashboard'
-  },
-  {
-    icon: 'eva-browser-outline',
-    label: 'Empresas',
-    active: 'Empresas',
-    separator: false,
-    to: 'empresas'
-  },
-  {
-    icon: 'eva-person-outline',
-    label: 'Utilizadores',
-    active: 'Utilizadores',
-    separator: false,
-    to: 'utilizadores'
-  },
-  {
-    label: 'Entidades',
-    icon: 'eva-search-outline',
+    label: 'Arquivo',
+    icon: 'eva-file-outline',
     multiple: true,
     items: [
       {
         label: 'Documentos',
-        icon: 'eva-file-outline',
-        to: 'perfil'
+        to: '/arquivo/documentos',
+        active: 'Documentos'
       },
       {
         label: 'Pessoas',
-        icon: 'eva-people-outline',
-        to: 'msg'
+        to: '/arquivo/pessoas'
+      },
+      {
+        label: 'Empresas',
+        to: '/arquivo/empresas'
+      },
+      {
+        label: 'Anuncios',
+        to: '/arquivo/anuncios'
+      },
+      {
+        label: 'Utilizadores',
+        to: '/arquivo/utilizadores'
       }
     ],
-    active: 'Perdidos',
+    active: 'Documentos',
     separator: true,
-    to: 'entidades'
+    permission: 'entidades'
+  },
+  {
+    icon: 'navigation',
+    label: 'Blog',
+    active: 'Blog',
+    separator: false,
+    to: '/blog',
+    permission: 'blog'
+  },
+  {
+    icon: 'eva-grid-outline',
+    label: 'Painel de controle',
+    active: 'Painel de controle',
+    separator: true,
+    permission: 'dashboard',
+    to: '/dashboard'
+  },
+  {
+    icon: 'eva-browser-outline',
+    label: 'Empresas',
+    permission: 'empresas',
+    separator: false,
+    to: '/empresa'
+  },
+  {
+    icon: 'eva-person-outline',
+    label: 'Utilizadores',
+    permission: 'utilizadores',
+    separator: false,
+    to: '/utilizador'
   },
   {
     icon: 'eva-paper-plane-outline',
     label: 'Locais de entrega',
     active: 'Locais de entrega',
     separator: false,
-    to: 'instituicoes'
+    to: '/instituicao',
+    permission: 'instituicoes'
   }
 ]
 
@@ -209,6 +250,7 @@ export default {
       this.link = value
     },
     onExpansion () {
+      this.$router.push({ path: '/arquivo/documentos' })
       this.classObject['option-active'] = true
     },
     logout () {
@@ -218,7 +260,7 @@ export default {
   },
   mounted () {
     menuList.forEach((menu, index) => {
-      menuList[index].yes = this.hasPermissionPage(menu.to)
+      menuList[index].yes = this.hasPermissionPage(menu.permission)
     })
   }
 }

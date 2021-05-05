@@ -31,6 +31,30 @@ export default {
   },
   data () {
     return {
+      left: [
+        {
+          label: 'ss left',
+          type: 'check',
+          field: 'perms',
+          checks: [
+            {
+              label: 'teste1',
+              val: 'teste1'
+            },
+            {
+              label: 'teste2',
+              val: 'teste2'
+            }
+          ]
+        }
+      ],
+      right: [
+        {
+          label: 'Teste right',
+          type: 'text',
+          field: 'campo2'
+        }
+      ],
       items: [
         {
           label: 'Visualizacoes',

@@ -13,7 +13,6 @@
         :label="option.label"
         class="q-mx-md"
         :to="option.to"
-        :icon="option.icon"
     />
     </q-tabs>
   </div>

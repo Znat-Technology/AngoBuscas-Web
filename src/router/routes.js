@@ -15,11 +15,31 @@ const routes = [
     ]
   },
   {
+    path: '/arquivo',
+    name: 'Arquivo',
+    component: () => import('layouts/Dashboard.vue'),
+    children: [
+      { path: 'documentos', component: () => import('src/pages/dashboard/trash/documentsPage.vue') },
+      { path: 'utilizadores', component: () => import('src/pages/dashboard/trash/usersPage.vue') },
+      { path: 'empresas', component: () => import('src/pages/dashboard/trash/companiesPage.vue') },
+      { path: 'pessoas', component: () => import('src/pages/dashboard/trash/peoplesPage.vue') },
+      { path: 'anuncios', component: () => import('src/pages/dashboard/trash/advertsPage.vue') }
+    ]
+  },
+  {
     path: '/permission',
     name: 'Permission',
     component: () => import('layouts/Dashboard.vue'),
     children: [
       { path: '', component: () => import('src/pages/Permission.vue') }
+    ]
+  },
+  {
+    path: '/submissao',
+    name: 'Submissao',
+    component: () => import('layouts/Dashboard.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/dashboard/ItemSubmited.vue') }
     ]
   },
   {
@@ -29,15 +49,25 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => import('src/pages/dashboard/DashboardPage.vue')
+        component: () => import('src/pages/dashboard/panel/DashboardPage.vue')
       }
     ]
   },
   {
-    path: '/perfil',
+    path: '/utilizador',
+    name: 'Utilizador',
     component: () => import('layouts/Dashboard.vue'),
     children: [
-      { path: '', component: () => import('src/pages/dashboard/ProfilePage.vue') }
+      { path: '', component: () => import('src/pages/dashboard/users/UsersPage.vue') },
+      {
+        path: 'registrar',
+        component: () => import('src/pages/dashboard/users/FormUserPage.vue')
+      },
+      {
+        path: 'actualizar',
+        component: () => import('src/pages/dashboard/users/FormUserPage.vue')
+      },
+      { path: 'perfil', component: () => import('src/pages/dashboard/ProfilePage.vue') }
     ]
   },
   {
@@ -48,24 +78,39 @@ const routes = [
     ]
   },
   {
-    path: '/instituicoes',
+    path: '/instituicao',
     component: () => import('layouts/Dashboard.vue'),
     children: [
-      { path: '', component: () => import('src/pages/dashboard/InstituicoesPage.vue') }
+      { path: '', component: () => import('src/pages/dashboard/place/PlacesPage.vue') },
+      { path: 'registrar', component: () => import('src/pages/dashboard/place/FormPlacePage.vue') },
+      { path: 'actualizar', component: () => import('src/pages/dashboard/place/FormPlacePage.vue') }
     ]
   },
   {
-    path: '/utilizadores',
+    path: '/blog',
     component: () => import('layouts/Dashboard.vue'),
     children: [
-      { path: '', component: () => import('src/pages/dashboard/UtilizadoresPage.vue') }
+      { path: '', component: () => import('src/pages/dashboard/blog/BlogPage.vue') },
+      { path: 'registrar', component: () => import('src/pages/dashboard/blog/FormBlogPage.vue') },
+      { path: 'actualizar', component: () => import('src/pages/dashboard/blog/FormBlogPage.vue') }
     ]
   },
   {
-    path: '/empresas',
+    path: '/categoria',
     component: () => import('layouts/Dashboard.vue'),
     children: [
-      { path: '', component: () => import('src/pages/dashboard/EmpresasPage.vue') }
+      { path: '', component: () => import('src/pages/dashboard/category/CategoryPage.vue') },
+      { path: 'registrar', component: () => import('src/pages/dashboard/category/FormCategoryPage.vue') },
+      { path: 'actualizar', component: () => import('src/pages/dashboard/category/FormCategoryPage.vue') }
+    ]
+  },
+  {
+    path: '/empresa',
+    component: () => import('layouts/Dashboard.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/dashboard/company/CompaniesPage.vue') },
+      { path: 'registrar', component: () => import('src/pages/dashboard/company/FormCompanyPage') },
+      { path: 'actualizar', component: () => import('src/pages/dashboard/company/FormCompanyPage') }
     ]
   },
   // Always leave this as last one,
