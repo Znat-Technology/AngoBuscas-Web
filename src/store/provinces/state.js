@@ -19,6 +19,11 @@ export default function () {
       'Uíge',
       'Zaire',
     ],
-    selectedProvince: 'Luanda'
+    selectedProvince: 'Luanda',
+    search: '',
+    category: '',
+    searchType: 'Pessoas',
+    skeletonAlive: false,
+    resultsData: []
   }
 }

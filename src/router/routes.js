@@ -7,6 +7,13 @@ const routes = [
     ]
   },
   {
+    path: '/alternative',
+    component: () => import('layouts/AlternativeLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/AlternativePage.vue') }
+    ]
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('layouts/Login.vue'),
@@ -93,6 +100,27 @@ const routes = [
       { path: '', component: () => import('src/pages/dashboard/blog/BlogPage.vue') },
       { path: 'registrar', component: () => import('src/pages/dashboard/blog/FormBlogPage.vue') },
       { path: 'actualizar', component: () => import('src/pages/dashboard/blog/FormBlogPage.vue') }
+    ]
+  },
+  {
+    path: '/noticias',
+    component: () => import('layouts/AlternativeLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/BlogPage.vue') }
+    ]
+  },
+  {
+    path: '/detalhe',
+    component: () => import('layouts/AlternativeLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/deltailsItem.vue') }
+    ]
+  },
+  {
+    path: '/sobre',
+    component: () => import('layouts/AlternativeLayout.vue'),
+    children: [
+      { path: '', component: () => import('src/pages/AboutPage.vue') }
     ]
   },
   {

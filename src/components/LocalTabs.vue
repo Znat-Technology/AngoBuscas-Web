@@ -1,19 +1,27 @@
 <template>
   <div>
     <q-tabs
-        indicator-color="transparent"
-        inline-label
-        active-color="primary"
-        no-caps
-        class="bg-white text-grey-8"
+      indicator-color="transparent"
+      inline-label
+      active-color="primary"
+      no-caps
+       dense
+      class="bg-white text-grey-8"
     >
     <q-route-tab
         v-for="(option, index) in options"
         :key="index"
-        :label="option.label"
         class="q-mx-md"
+        :icon="option.icon"
         :to="option.to"
-    />
+    >
+      <q-tooltip
+         transition-show="scale"
+        transition-hide="scale"
+      >
+        {{ option.tooltip }}
+      </q-tooltip>
+    </q-route-tab>
     </q-tabs>
   </div>
 </template>
@@ -26,6 +34,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+ .q-tabs__content {
+   padding: 1px;
+ }
 </style>

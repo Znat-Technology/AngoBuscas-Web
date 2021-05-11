@@ -109,22 +109,17 @@
                     <div class="sidebar_advanced_search_widget">
                       <h4 class="title mb25">Criterios de busca</h4>
                      	<div class="row q-gutter-y-md">
-                          <q-input class="col-12" dense :autofocus="isFocused" outlined placeholder="Buscar por...">
+                          <q-input class="col-12" dense v-model="modelSearch" :autofocus="isFocused" outlined placeholder="Buscar por...">
                             <template v-slot:prepend>
                               <q-icon name="search" size="xs"/>
                             </template>
                           </q-input>	
-                          <q-select class="col-12" label="Buscar por" dense outlined :options="[]">
+                          <q-select class="col-12" label="Buscar por" v-model="searchPeopleOrDocument" dense outlined :options="['Pessoas', 'Documentos']">
                             <template v-slot:prepend>
                               <q-icon name="location_on" size="xs"/>
                             </template>
                           </q-select>
-                          <q-select class="col-12" label="Categoria" dense outlined :options="[]">
-                            <template v-slot:prepend>
-                              <q-icon name="category" size="xs"/>
-                            </template>
-                          </q-select>
-                            <q-select class="col-12" label="Categoria" dense outlined :options="[]">
+                            <q-select class="col-12" label="Categoria" v-model="modelCategory" dense outlined :options="categories">
                             <template v-slot:prepend>
                               <q-icon name="category" size="xs"/>
                             </template>
@@ -198,8 +193,10 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import { fetch } from '../controllers/fecthAPIController'
 
 export default {
+  mixins: [fetch],
   props: {
     infos: Array,
     submited: Boolean,
@@ -207,15 +204,7 @@ export default {
     type: String
   },
   computed: {
-    ...mapState('provinces', ['provinces', 'selectedProvince']),
-    modelProvince: {
-      get () {
-        return this.$store.state.provinces.selectedProvince
-      },
-      set (val) {
-        this.$store.commit('provinces/SELECT_PROVINCE', val)
-      }
-    }
+    ...mapState('provinces', ['provinces', 'selectedProvince'])
   },
   data () {
     return {

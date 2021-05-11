@@ -60,23 +60,29 @@
 							<h2 class="fz55">AngoBuscas plataforma</h2>
 							<p class="fz18 color-white">Encontre documentos e pessoas que foram cadastrados na plataforma</p>
 						</div>
-						<div class="home_adv_srch_opt">
+						<div class="home_adv_srch_opt"> 
 							<ul class="nav nav-pills" id="pills-tab" role="tablist">
-								<li class="nav-item">
-									<a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Pessoas</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Documentos</a>
-								</li>
+                <q-btn-toggle
+                  class="q-my-md nav-item nav-link active"
+                  v-model="searchPeopleOrDocument"
+                  text-color="dark"
+                  color="white"
+                  rounded
+                  toggle-color="primary"
+                  :options="[
+                    {label: 'Pessoas', value: 'Pessoas'},
+                    {label: 'Documentos', value: 'Documentos'},
+                  ]"
+                />
 							</ul>
 							<div class="tab-content home1_adsrchfrm" id="pills-tabContent" style="width:1150px">
 								<div class="row justify-around">
-									<q-input class="col-5" dense :autofocus="true" outlined placeholder="Buscar por...">
+									<q-input class="col-5" dense :autofocus="true" v-model="modelSearch" outlined placeholder="Buscar por...">
 										<template v-slot:prepend>
 										  <q-icon name="search" size="xs"/>
 										</template>
 									</q-input>	
-									<q-select class="col-3" dense outlined :options="[]">
+									<q-select class="col-3" dense outlined v-model="modelCategory" :options="categories">
 										<template v-slot:prepend>
 										  <q-icon name="category" size="xs"/>
 										</template>
@@ -98,8 +104,9 @@
   
    <q-header class="bg-white" v-else bordered>
       <q-toolbar class="bg-white text-dark">
-        <q-btn flat round dense icon="menu" class="q-mr-xs" />
         <q-toolbar-title class="text-grand-hotel text-right"><strong>AngoBuscas</strong></q-toolbar-title>
+        <q-space/>
+        <q-btn flat  dense label="Filtros" icon="menu" class="q-mr-xs" />
       </q-toolbar>
             <q-toolbar class="bg-white text-dark">
         	<q-input class="full-width" dense  placeholder="Buscar por..."/>
@@ -135,8 +142,10 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { fetch } from '../controllers/fecthAPIController'
+
 export default {
+  mixins: [fetch],
   components: {
     'items-lost': require('components/LostItem.vue').default,
     'form-doc': require('components/registerDocument.vue').default,
@@ -150,79 +159,10 @@ export default {
       maxPages: 2,
       pesquisa: '',
       maximizedToggle: true,
-      model: 'per',
+      categories: [],
       dialodCad: false,
       cadChoice: 'doc',
-      provinceModel: 'Luanda',
-      data: [],
-      total: 0
-    }
-  },
-  computed: {
-    modelProvince: {
-      get () {
-        return this.$store.state.provinces.selectedProvince
-      },
-      set (val) {
-        this.$store.commit('provinces/SELECT_PROVINCE', val)
-      }
-    },
-    ...mapState('provinces', ['provinces', 'selectedProvince']),
-    ...mapMutations('provinces', ['SELECT_PROVINCE']),
-    placeholder () {
-      return (this.model === 'per') ? 'Buscar pessoas por: nome, idade, sexo...' : 'Buscar documentos por: nome, categoria...'
-    }
-  },
-  methods: {
-    async getDocs () {
-      const response = await this.$axios.put(`${process.env.API}document/search?page=${this.current}&limit=5`, { search: this.pesquisa })
-      this.data = response.data
-      this.getCount()
-    },
-    async getCount () {
-      const endpoint = (this.model === 'docs') ? 'document' : 'people'
-      const response = await this.$axios.put(`${process.env.API}${endpoint}/count`, { search: this.pesquisa })
-      this.total = response.data
-      this.maxPages = parseInt(Math.ceil(this.total / 5))
-    },
-    async getPeoples () {
-      const response = await this.$axios.put(`${process.env.API}people/search?page=${this.current}&limit=5`, { search: this.pesquisa })
-      this.data = response.data
-      this.getCount()
-    },
-    reverse () {
-      if (this.cadChoice === 'doc') {
-        this.cadChoice = 'pessoa'
-      } else if (this.cadChoice === 'pessoa') {
-        this.cadChoice = 'doc'
-      }
-    }
-  },
-  mounted () {
-    this.getPeoples()
-  },
-  watch: {
-    pesquisa () {
-      if (this.model === 'docs') {
-        this.getDocs()
-      } else {
-        this.getPeoples()
-      }
-    },
-    model (newValue) {
-      if (newValue === 'docs') {
-        this.getDocs()
-      } else {
-        this.getPeoples()
-      }
-      console.log(this.total)
-    },
-    current () {
-      if (this.model === 'docs') {
-        this.getDocs()
-      } else {
-        this.getPeoples()
-      }
+      data: []
     }
   }
 }

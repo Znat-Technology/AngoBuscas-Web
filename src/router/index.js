@@ -16,7 +16,7 @@ Vue.use(VueRouter)
  */
 import { SessionStorage } from 'quasar'
 
-const freeRoutes = ['/login', '/']
+const freeRoutes = ['/login', '/', '/alternative', '/noticias', '/sobre', '/detalhe']
 // const MAIN_PAGE = 'dashboard'
 
 export default function (/* { store, ssrContext } */) {
