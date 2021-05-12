@@ -47,7 +47,7 @@ module.exports = function (ctx) {
       env: {
         API: ctx.dev
           ? 'http://localhost:3000/api/'
-          : 'http://localhost:3000/api/'
+          : 'https://angobuscas-backend-api.herokuapp.com/api/'
       },
       vueRouterMode: 'hash', // available values: 'hash', 'history'
 

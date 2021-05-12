@@ -16,7 +16,7 @@
                   v-for="(img, index) in slidesImage"
                   :key="index"
                   :name="index+1"
-                  :img-src="`http://localhost:3000/${img}`"
+                  :img-src="img"
                >
               </q-carousel-slide>
               <!--template v-slot:control>
@@ -58,7 +58,7 @@
             >
               <q-carousel-slide v-for="(slides, ind) in 4" :key="ind" :name="ind+1" class="column no-wrap">
                 <div class="row fit justify-start items-center q-gutter-xs q-col-gutter no-wrap">
-                  <q-img v-for="(infoBanner, index) in bannerData[ind]" :key="index" class="rounded-borders-x col-3 full-height" :src="`http://localhost:3000/${infoBanner.images[0]}`">
+                  <q-img v-for="(infoBanner, index) in bannerData[ind]" :key="index" class="rounded-borders-x col-3 full-height" :src="infoBanner.images[0]">
                    <div class="absolute-bottom bg-transparent">
                       <div class="text-caption q-px-sm rounded-borders text-bold bg-xxxx">{{ infoBanner.name }}</div>
                     </div>
@@ -72,11 +72,11 @@
                     <div class="row q-mx-lg justify-center">
                       <div v-for="info in infos" :key="info._id" class="q-mt-none col-12">
                           <div class="feat_property list">
-                            <div class="thumb" style="height:200px">
+                            <div class="thumb" style="height:300px">
                               <q-img 
                                 class="img-whp"
                                 style="width:100%;height:100%"
-                                :src="`http://localhost:3000/${info.images[0]}`"
+                                :src="info.images[0]"
                                 />
                             </div>
                             <div class="details">
@@ -126,10 +126,10 @@
       <div v-if="$q.screen.xs || $q.screen.sm">
         <div v-for="info in infos" :key="info._id">
            <q-card class="my-card q-my-sm">
-            <q-avatar class="full-width" square size="260px">
+            <q-avatar class="full-width" square size="310px">
               <q-img
                 class="col"
-                :src="`http://localhost:3000/${info.images[0]}`"
+                :src="info.images[0]"
                 style="width:100%;height:100%"
               />
             </q-avatar>
