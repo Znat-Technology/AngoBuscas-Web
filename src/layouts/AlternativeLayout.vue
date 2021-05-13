@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh Lpr lFf">
-    <q-header v-if="!$q.screen.xs" class="bg-white" bordered>
-      <q-toolbar class="bg-white row justify-between">
+    <q-header  v-if="!$q.screen.xs" class="bg-white" bordered>
+      <q-toolbar class="bg-white">
         <q-toolbar-title class="col-2">
            <strong  class=" text-grand-hotel text-weight-500 text-dark">
              AngoBuscas
@@ -29,7 +29,10 @@
                 </q-input>
               </div>
            </div>
-           <l-tabs class="col-3 large-screen-only" :options="options"/>
+           <q-space/>
+           <div> 
+              <l-tabs class="large-screen-only" :options="options"/>
+           </div>
       </q-toolbar>
     </q-header>
     <q-drawer
@@ -162,6 +165,12 @@ export default {
 </script>
 
 <style lang="scss">
+ /*.q-field {
+    &--dense
+      .q-field__control, .q-field__marginal {
+        height: 35px !important;
+      }
+  }*/
   .q-toolbar__title {
     @media (max-width: $breakpoint-sm-max) {
       text-align: center;
@@ -177,4 +186,4 @@ export default {
   .q-tabs__content .q-tab__icon {
     font-size: 20px;
   }
-</style>>
+</style>

@@ -40,8 +40,8 @@
         </q-card>
     </q-dialog>
           <!-- Divide em items procurados e anuncios -->
-        <div class="row q-mx-sm">
-          <div class="col-sm-12 col-md-8 col-xs-12 col-lg-8 col-xl-8">
+        <div class="row justify-center">
+          <div class="col-sm-12 col-md-11 col-xs-12 col-lg-12 col-xl-12">
             <q-carousel
               v-if="!$q.screen.xs && modelSearch === ''" 
               v-model="slideBanner"
@@ -69,52 +69,9 @@
             <div v-if="$q.screen.md || $q.screen.lg || $q.screen.xl">
                 <div class="q-mt-md our-listing bgc-f7 pb30-991 pt100-360">
                 <div class="container">
-                    <div class="row q-mx-lg justify-center">
-                      <div v-for="info in infos" :key="info._id" class="q-mt-none col-12">
-                          <div class="feat_property list">
-                            <div class="thumb" style="height:300px">
-                              <q-img 
-                                class="img-whp"
-                                style="width:100%;height:100%"
-                                :src="info.images[0]"
-                                />
-                            </div>
-                            <div class="details">
-                              <div class="tc_content">
-                                <div class="dtls_headr">
-                                  <ul class="tag">
-                                    <li class="list-inline-item full-width q-px-md">
-                                      <a href="#">
-                                        {{ info.category }}
-                                      </a>
-                                    </li>
-                                  </ul>
-                                </div>
-                                  <q-card-section class="q-pt-xs">
-                                    <div class="text-subtitle1 text-bold">
-                                      {{ info.name || info.onwner }}
-                                    </div>
-                                    <q-item-label caption lines="3">
-                                    <div class="text-caption text-grey">
-                                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </div>
-                                    </q-item-label>
-                                  </q-card-section>
-                                  <div class="float-right">
-                                <q-btn flat round color="primary" icon="image" @click="getSlide(info.images)">
-                                  <q-tooltip>
-                                    Outras imagens
-                                  </q-tooltip>
-                                </q-btn>
-                                <q-btn flat round color="primary" @click="setDataDetails(info)" icon="visibility">
-                                  <q-tooltip>
-                                    Mais detalhes
-                                  </q-tooltip>
-                                </q-btn>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                    <div class="row">
+                    <div v-for="info in infos" :key="info._id" class="q-mt-none col-3">
+                          <card-vertical :info="info"/>
                     </div>      
                     </div>
                 </div>
@@ -125,44 +82,7 @@
       <!-- View para web-mobile -->
       <div v-if="$q.screen.xs || $q.screen.sm">
         <div v-for="info in infos" :key="info._id">
-           <q-card class="my-card q-my-sm">
-            <q-avatar class="full-width" square size="310px">
-              <q-img
-                class="col"
-                :src="info.images[0]"
-                style="width:100%;height:100%"
-              />
-            </q-avatar>
-          <q-list class="q-my-md">
-              <q-item dense>
-                <q-badge dense color="primary">
-                    <q-item-label>{{ info.category }}</q-item-label>
-                </q-badge>
-              </q-item>
-          </q-list>
-              <q-card-section class="q-pt-xs">
-                  <div class="text-subtitle1">
-                    {{ info.name || info.onwner }}
-                  </div>
-                  <q-item-label caption lines="3">
-                    <div class="text-caption text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </div>
-                  </q-item-label>
-                </q-card-section>
-          <q-card-actions align="left">
-             <q-toggle v-if="submited" color="primary" label="Aceitar" v-model="accepted" :val="info._id" />
-             <q-btn flat round color="primary" icon="image" @click="getSlide(info.images)">
-                  <q-tooltip>
-                     Outras imagens
-                  </q-tooltip>
-                </q-btn>
-                <q-btn flat round color="primary" icon="visibility">
-                  <q-tooltip>
-                     Mais detalhes
-                  </q-tooltip>
-                </q-btn>
-          </q-card-actions>
-        </q-card>
+          <card-vertical :info="info"/>
         </div>
       </div>
   </div>
@@ -179,6 +99,10 @@ export default {
     submited: Boolean,
     total: Number,
     type: String
+  },
+  components: {
+    'card-vertical': require('components/viewVertical.vue').default,
+    'card-horizontal': require('components/viewHorizontal.vue').default,
   },
   computed: {
     ...mapState('provinces', ['provinces', 'selectedProvince'])
@@ -231,19 +155,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .my-card {
-    width: 100%;
-  }
   .bg-xxxx {
     background-color: rgba(0, 0, 0, 0.373);
-  }
-  .custom-caption{
-    text-align: center;
-    padding: 12px;
-    color: white;
-    background-color: red;
-  }
-  .rounded-borders-x {
-    border-radius: 14px;
   }
 </style>

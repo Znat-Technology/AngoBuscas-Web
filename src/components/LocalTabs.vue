@@ -1,17 +1,16 @@
 <template>
-  <div>
-    <q-tabs
+  <q-tabs
       indicator-color="transparent"
-      inline-label
       active-color="primary"
+      shrink stretch
       no-caps
-       dense
+      align="right"
+      exact
       class="bg-white text-grey-8"
     >
     <q-route-tab
         v-for="(option, index) in options"
         :key="index"
-        class="q-mx-md"
         :icon="option.icon"
         :to="option.to"
     >
@@ -23,7 +22,6 @@
       </q-tooltip>
     </q-route-tab>
     </q-tabs>
-  </div>
 </template>
 
 <script>

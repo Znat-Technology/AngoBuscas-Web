@@ -13,7 +13,7 @@
       </q-toolbar>
    </q-header>
       <div>
-        <div v-if="skeletonAlive">
+        <div v-if="skeleton">
           <mobile-skeleton v-if="$q.screen.xs || $q.screen.sm"/>
           <web-skeleton v-else/>
         </div>
@@ -72,6 +72,7 @@ export default {
       current: 1,
       maxPages: 2,
       pesquisa: '',
+      skeleton: false,
       maximizedToggle: true,
       categories: [],
       dialodCad: false,
