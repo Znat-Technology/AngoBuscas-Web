@@ -35,59 +35,170 @@
            </div>
       </q-toolbar>
     </q-header>
+
+    <!-- Categories and Filter -->
     <q-drawer
       v-if="isSearchRoute"
       v-model="leftDrawerOpen"
       show-if-above
       bordered
-      :width="250"
+      :width="280"
       :breakpoint="500"
+      class="text-dark"
     >
-        <q-list class="q-pa-md q-mt-lg">
-        <div class="row q-gutter-y-md justify-center">
-            <q-select
-              class="col-12 text-dark"
-              v-model="searchPeopleOrDocument"
-              dense
-              outlined
-              transition-show="jump-up"
-              transition-hide="jump-up"
-              :options="['Pessoas', 'Documentos']"
-            >
-            <template v-slot:prepend>
-                <q-icon name="search" size="xs" color="dark"/>
-            </template>
-            </q-select>
-            <q-select 
-              class="col-12 text-dark"
-              v-model="modelCategory"
-               transition-show="jump-up"
-              transition-hide="jump-up"
-              dense
-              outlined
-              :options="categories"
-            >
-            <template v-slot:prepend>
-                <q-icon name="category" size="xs" color="dark"/>
-            </template>
-            </q-select>
-            <q-select
-              class="col-12 text-dark"
-               transition-show="jump-up"
-              transition-hide="jump-up"
-              v-model="modelProvince"
-              :options="provinces"
-              dense
-              outlined
-            >
-            <template v-slot:prepend>
-                <q-icon name="location_on" color="dark" size="xs"/>
-            </template>
-            </q-select>
-        </div>
-        </q-list>
-    </q-drawer>
+
+      <!-- Scroll Config -->
+      <q-scroll-area
+        :thumb-style="thumbStyle"
+        :bar-style="barStyle"
+        class="fit"
+      >
+
+      <!-- Label Separator -->
+      <q-list class="q-mt-md q-mb-sm q-ml-md">
+        <q-item-label class="text-left text-grey-7 text-subtitle1">Buscar por:</q-item-label>
+      </q-list>
+
+      <!-- Document or People -->
+      <q-list>
+        <q-btn-toggle
+          class="q-mx-lg q-mb-lg my-custom-toggle"
+          v-model="searchPeopleOrDocument"
+          spread
+          toggle-color="primary"
+          no-caps
+          color="white"
+          unelevated
+          bord
+          text-color="black"
+          :options="[
+            {label: 'Pessoas', value: 'Pessoas'},
+            {label: 'Documentos', value: 'Documentos'}
+          ]"
+        />
+      </q-list>
+
+      <!-- Label Separator -->
+      <q-list><q-separator inset></q-separator></q-list>
+      <q-list class="q-mt-md q-mb-sm q-ml-md">
+        <q-item-label class="text-left text-grey-7 text-subtitle1">Critérios de Busca</q-item-label>
+      </q-list>
+
+      <!-- Criterio de Busca -->
+      <q-list class="q-mb-md">
+        <!-- Provincias -->
+        <q-expansion-item
+          expand-separator
+          icon="eva-pin-outline"
+          label="Provincias"
+          class="q-ml-md text-bold text-body2 q-mb-sm q-mr-sm"
+        >
+          <q-card>
+            <q-card-section>
+              <!-- All -->
+              <q-item
+                dense
+                clickable
+                v-ripple
+                class="text-caption"
+                >
+                  <q-checkbox dense v-model="choice" label="Todas"></q-checkbox>
+              </q-item> 
+
+              <q-item
+                dense
+                clickable
+                v-ripple
+                v-for="(province, index) in provinces" :key="index"
+                class="text-caption"
+                >
+                <q-checkbox dense v-model="choice" :label="province"></q-checkbox>
+              </q-item>           
+            </q-card-section>
+          </q-card>
+
+        </q-expansion-item>
+
+        <!-- Categoria --> 
+        <q-expansion-item
+          expand-separator
+          icon="view_list"
+          label="Categorias"
+          class="q-ml-md text-bold text-body2 q-mb-sm q-mr-sm"
+        >
+          <q-card>
+            <q-card-section>
+              <!-- All -->
+              <q-item
+                dense
+                clickable
+                v-ripple
+                class="text-caption"
+                >
+                  <q-checkbox dense v-model="choice" label="Todas"></q-checkbox>
+              </q-item> 
+
+              <q-item
+                dense
+                clickable
+                v-ripple
+                v-for="(category, index) in categories" :key="index"
+                class="text-caption"
+                >
+                <q-checkbox dense v-model="modelCategory" :label="category.description"></q-checkbox>
+              </q-item>           
+            </q-card-section>
+          </q-card>
+
+        </q-expansion-item>
+
+        <!-- Data Time -->
+        <q-input class="q-mx-md q-pl-sm" dense square outlined v-model="email" hint="Data Inicial" type="date">
+          <template v-slot:prepend>
+            <q-icon class="bg-bold" name="today" />
+          </template>
+        </q-input>
+        <q-input class="q-mx-md q-mt-md q-pl-sm" dense square outlined v-model="email" hint="Data Final" type="date">
+          <template v-slot:prepend>
+            <q-icon class="bg-bold" name="today" />
+          </template>
+        </q-input>
+
+      </q-list>
+
+
+      <!-- Label Separator -->
+      <q-list><q-separator inset></q-separator></q-list>
+      <q-list class="q-mt-md q-mb-sm q-ml-md">
+        <q-item-label class="text-left text-grey-7 text-subtitle1">Mais Pesquisados</q-item-label>
+      </q-list>
       
+
+      <!-- Mais Pesquisados -->
+      <q-list dense padding class="rounded-borders q-ml-md text-body2">
+      <q-item clickable v-ripple>
+        <q-item-section>
+          Bilhete Identidade
+        </q-item-section>
+      </q-item>
+
+      <q-item clickable v-ripple>
+        <q-item-section>
+          Carta de Condução
+        </q-item-section>
+      </q-item>
+
+      <q-item clickable v-ripple>
+        <q-item-section>
+          Cedula Pessoal
+        </q-item-section>
+      </q-item>
+    </q-list>
+
+
+      </q-scroll-area>
+    </q-drawer>
+    
     <!-- Rodape Ango Buscas -->
     <q-footer  bordered class="bg-white text-primary">
      <p class="large-screen-only q-pa-xs float-right"> {{ total }} Resultados</p>
@@ -106,9 +217,12 @@
             />
           </q-tabs>
     </q-footer>
+
+    <!-- Content of page -->
     <q-page-container>
       <router-view></router-view>
     </q-page-container>
+
   </q-layout>
 </template>
 
@@ -122,6 +236,7 @@ export default {
   },
   data () {
     return {
+      choice: false,
       leftDrawerOpen: true,
       options: [
         {
@@ -147,8 +262,23 @@ export default {
           tooltip: 'Sobre a plataforma',
           icon: 'contact_support',
           to: '/sobre'
-        }
-      ]
+        },
+      ],
+      // Scrool Config
+      thumbStyle: {
+        right: '4px',
+        borderRadius: '5px',
+        backgroundColor: '#fd6b70e1',
+        width: '5px',
+        opacity: 0.80
+      },
+
+      barStyle: {
+        right: '2px',
+        borderRadius: '9px',
+        width: '9px',
+        opacity: 0.2
+      }
     }
   },
   computed: {

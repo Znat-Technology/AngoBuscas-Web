@@ -20,7 +20,7 @@
               {{ info.name || info.onwner }}
             </div>
             <p>
-              <q-item-label caption lines="3">
+              <q-item-label caption lines="2">
                 <div class="text-caption text-grey">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.

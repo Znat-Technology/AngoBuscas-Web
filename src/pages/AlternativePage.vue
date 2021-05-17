@@ -1,5 +1,56 @@
 <template>
   <q-page id="items" :class="($q.screen.xs)? 'bg-white' : 'bgc-f7 pb30-991 pt100-360'">
+         <q-dialog
+      v-model="dialodCad"
+      v-if="$q.screen.xs"
+      persistent
+      :maximized="maximizedToggle"
+      transition-show="slide-up"
+      transition-hide="slide-down"
+    >
+      <q-card class="bg-white">
+        <q-bar class="bg-dark text-white">
+          <q-btn dense flat  label="Voltar" icon="arrow_back" v-close-popup>
+          </q-btn>
+          <q-space />
+        </q-bar>
+
+        <q-card-section class="constrain-2">
+          <q-radio class="col" v-model="cadChoice" val="doc" label="Documento" />
+          <q-radio class="col" v-model="cadChoice" val="pessoa" label="Pessoa" />
+        </q-card-section>
+
+        <q-card-section class="q-pb-xl constrain-2">
+          <form-doc v-if="cadChoice==='doc'" @ok="reverse()"/>
+          <form-people v-else @ok="reverse()"/>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+      <q-dialog
+      v-else
+      v-model="dialodCad"
+      persistent
+      >
+        <q-card style="width: 790px; max-width: 80vw;">
+        <q-toolbar>
+          <div class="text-h5">
+            Registrar
+          </div>
+          <q-space/>
+          <q-btn class="text-white" round size="md" icon="close" v-close-popup color="primary"></q-btn>
+        </q-toolbar>
+
+        <q-card-section class="constrain-2">
+          <q-radio class="col" v-model="cadChoice" val="doc" label="Documento" />
+          <q-radio class="col" v-model="cadChoice" val="pessoa" label="Pessoa" />
+        </q-card-section>
+
+        <q-card-section class="q-pb-xl constrain-2">
+          <form-doc v-if="cadChoice==='doc'" @ok="reverse()"/>
+          <form-people v-else @ok="reverse()"/>
+        </q-card-section>
+        </q-card>
+      </q-dialog>
     <q-header class="bg-white" v-if="$q.screen.xs" bordered>
       <q-toolbar class="bg-white text-dark">
         <q-toolbar-title class="text-grand-hotel text-right"><strong>AngoBuscas</strong></q-toolbar-title>
@@ -44,7 +95,7 @@
         </div>
       </div>
       <q-page-sticky position="bottom-right" :offset="[18, 18]">
-            <q-btn fab padding="sm" icon="add" color="blue" @click="dialodCad=true">
+            <q-btn fab padding="sm" icon="add" color="primary" @click="dialodCad=true">
                <q-tooltip>
                  Registrar
                </q-tooltip>
