@@ -118,7 +118,7 @@
 
         </q-expansion-item>
 
-        <!-- Categorias -->
+        <!-- Categoria --> 
         <q-expansion-item
           expand-separator
           icon="view_list"
