@@ -178,7 +178,7 @@
         <q-avatar class="full-width" size="200px" square>
           <q-img
             class="col"
-            :src="info.images[1]"
+            :src="info.images[0]"
             style="width: 100%; height: 100%"
           />
         </q-avatar>
