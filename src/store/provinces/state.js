@@ -1,6 +1,7 @@
 export default function () {
   return {
     provinces: [
+      'Todas provincias',
       'Bengo',
       'Benguela',
       'Bié',
@@ -19,11 +20,12 @@ export default function () {
       'Uíge',
       'Zaire',
     ],
-    selectedProvince: 'Luanda',
+    selectedProvince: 'Todas provincias',
     search: '',
-    category: '',
+    category: 'Todas categorias',
     searchType: 'Pessoas',
     skeletonAlive: false,
-    resultsData: []
+    resultsData: [],
+    showDialogCad: false
   }
 }

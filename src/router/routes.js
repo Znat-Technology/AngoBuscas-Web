@@ -1,16 +1,16 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/AlternativeLayout.vue'),
     children: [
-      { path: '', component: () => import('src/pages/MainPage.vue') }
+      { path: '', component: () => import('src/pages/AlternativePage.vue') }
     ]
   },
   {
     path: '/alternative',
-    component: () => import('layouts/AlternativeLayout.vue'),
+    component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('src/pages/AlternativePage.vue') }
+      { path: '', component: () => import('src/pages/MainPage.vue') }
     ]
   },
   {

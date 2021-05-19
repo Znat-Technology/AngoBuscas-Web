@@ -1,7 +1,7 @@
 <template>
   <q-page id="items" :class="($q.screen.xs)? 'bg-white' : 'bgc-f7 pb30-991 pt100-360'">
-         <q-dialog
-      v-model="dialodCad"
+    <q-dialog
+      v-model="showDialogCad"
       v-if="$q.screen.xs"
       persistent
       :maximized="maximizedToggle"
@@ -28,7 +28,7 @@
     </q-dialog>
       <q-dialog
       v-else
-      v-model="dialodCad"
+      v-model="showDialogCad"
       persistent
       >
         <q-card style="width: 790px; max-width: 80vw;">
@@ -51,20 +51,8 @@
         </q-card-section>
         </q-card>
       </q-dialog>
-    <q-header class="bg-white" v-if="$q.screen.xs" bordered>
-      <q-toolbar class="bg-white text-dark">
-        <q-toolbar-title class="text-grand-hotel text-right"><strong>AngoBuscas</strong></q-toolbar-title>
-        <q-space/>
-        <q-btn flat  dense label="Filtros" icon="menu" class="q-mr-xs" />
-      </q-toolbar>
-            <q-toolbar class="bg-white text-dark">
-        	<q-input class="full-width" dense  placeholder="Buscar por..."/>
-        <q-space />
-        <q-btn flat round dense icon="search" class="q-mr-xs" />
-      </q-toolbar>
-   </q-header>
       <div>
-        <div v-if="skeleton">
+        <div v-if="skeletonAlive">
           <mobile-skeleton v-if="$q.screen.xs || $q.screen.sm"/>
           <web-skeleton v-else/>
         </div>
@@ -80,7 +68,6 @@
                <small class="text-grey-6">Tente uma busca diferente</small>
               </div>
             </div>
-          <a href="#items">
             <q-pagination
               v-if="maxPages > 1"
               class="row justify-center q-mb-md"
@@ -91,11 +78,10 @@
               color="primary"
               active-color="primary"
             />
-          </a>
         </div>
       </div>
-      <q-page-sticky position="bottom-right" :offset="[18, 18]">
-            <q-btn fab padding="sm" icon="add" color="primary" @click="dialodCad=true">
+      <q-page-sticky  v-if="!$q.screen.xs" position="bottom-right" :offset="[18, 18]">
+            <q-btn fab padding="sm" icon="add" color="primary" @click="showDialog()">
                <q-tooltip>
                  Registrar
                </q-tooltip>
@@ -126,7 +112,6 @@ export default {
       skeleton: false,
       maximizedToggle: true,
       categories: [],
-      dialodCad: false,
       cadChoice: 'doc'
     }
   }

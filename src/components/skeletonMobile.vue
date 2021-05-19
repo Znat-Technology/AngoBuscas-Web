@@ -1,6 +1,6 @@
 <template>
   <div>
-      <div v-for="info in 1" :key="info">
+      <div v-for="info in 6" :key="info">
            <q-card class="my-card q-my-sm">
             <q-skeleton animation="fade" height="200px" square />
           <q-list class="q-my-md">

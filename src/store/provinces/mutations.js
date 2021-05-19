@@ -16,6 +16,9 @@ export function SELECT_SEARCH (state, data) {
 export function SEARCH_TYPE (state, data) {
   state.searchType = data
 }
+export function DIALOG_CAD (state, data) {
+  state.showDialogCad = data
+}
 export function SKELETON_SET (state, data) {
   state.skeletonAlive = data
 }

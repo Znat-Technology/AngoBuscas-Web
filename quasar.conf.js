@@ -49,7 +49,7 @@ module.exports = function (ctx) {
           ? 'http://localhost:3000/api/'
           : 'https://angobuscas-backend-api.herokuapp.com/api/'
       },
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
 
       // transpile: false,
 
