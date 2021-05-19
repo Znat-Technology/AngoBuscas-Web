@@ -190,11 +190,18 @@
 
       <q-item clickable v-ripple>
         <q-item-section>
-          Cedula Pessoal
+          Cédula Pessoal
         </q-item-section>
       </q-item>
+
+      <div class="row text-grey-8 text-caption fixed-bottom justify-center">
+        <q-icon name="copyright" class="q-pb-sm q-px-sm" style="font-size: 1.5em;" />
+        <q-item-label class=" q-pr-lg">ANGOBUSCAS 2021</q-item-label>
+      </div>
+       
     </q-list>
 
+     
 
       </q-scroll-area>
     </q-drawer>
@@ -272,7 +279,6 @@ export default {
         width: '5px',
         opacity: 0.80
       },
-
       barStyle: {
         right: '2px',
         borderRadius: '9px',
