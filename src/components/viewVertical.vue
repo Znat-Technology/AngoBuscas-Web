@@ -92,7 +92,7 @@
                   v-for="(img, index) in data.images"
                   :key="index"
                   :name="index + 1"
-                  :img-src="`http://localhost:3000/${img}`"
+                  :img-src="{img}"
                 />
               </q-carousel>
             </div>
