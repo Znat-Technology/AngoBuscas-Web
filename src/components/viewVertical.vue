@@ -1,32 +1,32 @@
 <template>
   <div class="q-mx-xs">
-        <q-dialog
+    <q-dialog
       v-model="dialodCad"
       persistent
       :maximized="maximizedToggle"
-       transition-show="slide-left"
+      transition-show="slide-left"
       transition-hide="slide-right"
     >
-        <q-card class="bgc-f7 pb30-991 pt100-360 text-white">
-          <q-bar class="bg-primary">
-            <q-btn
-              dense
-              flat
-              no-caps
-              :label="!$q.screen.xs ? 'Voltar' : ''"
-              :round="$q.screen.xs"
-              icon="arrow_back"
-              v-close-popup
-            >
-            </q-btn>
-            <q-space />
-            <q-item-label class="text-bold">
-              {{ titleDetail }}
-            </q-item-label>
-            <q-space />
-          </q-bar>
+      <q-card class="bgc-f7 pb30-991 pt100-360 text-white">
+        <q-bar class="bg-primary">
+          <q-btn
+            dense
+            flat
+            no-caps
+            :label="!$q.screen.xs ? 'Voltar' : ''"
+            :round="$q.screen.xs"
+            icon="arrow_back"
+            v-close-popup
+          >
+          </q-btn>
+          <q-space />
+          <q-item-label class="text-bold">
+            {{ titleDetail }}
+          </q-item-label>
+          <q-space />
+        </q-bar>
 
-        <q-card-section v-if="!$q.screen.xs && feedbackDone"> 
+        <q-card-section v-if="!$q.screen.xs && feedbackDone">
           hh
         </q-card-section>
         <div>
@@ -74,7 +74,12 @@
                 </template>
               </q-input>
               <div class="row">
-                <q-btn class="full-width" label="Enviar" type="submit" color="primary" />
+                <q-btn
+                  class="full-width"
+                  label="Enviar"
+                  type="submit"
+                  color="primary"
+                />
               </div>
             </q-form>
           </div>
@@ -97,75 +102,75 @@
               </q-carousel>
             </div>
             <div class="col col-md-6 col-xs-12">
-              <div :class="(!$q.screen.xs) ?'q-mx-xs' : ''">
-                 <q-list
-                bordered
-                padding
-                class="text-grey-8 text-body2 text-bold bg-white rounded-borders"
-              >
-                <q-item clickable v-ripple>
-                  <q-item-section side>
-                    <q-icon name="assignment" size="xs" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>{{
-                      !data.name ? "Proprietario" : "Nome"
-                    }}</q-item-label>
-                    <q-item-label caption>
-                      {{ data.name || data.onwner }}
-                    </q-item-label>
-                  </q-item-section>
-                </q-item>
+              <div :class="!$q.screen.xs ? 'q-mx-xs' : ''">
+                <q-list
+                  bordered
+                  padding
+                  class="text-grey-8 text-body2 text-bold bg-white rounded-borders"
+                >
+                  <q-item clickable v-ripple>
+                    <q-item-section side>
+                      <q-icon name="assignment" size="xs" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>{{
+                        !data.name ? "Proprietario" : "Nome"
+                      }}</q-item-label>
+                      <q-item-label caption>
+                        {{ data.name || data.onwner }}
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
 
-                <q-item clickable v-ripple>
-                  <q-item-section side>
-                    <q-icon name="category" size="xs" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>Categoria</q-item-label>
-                    <q-item-label caption>
-                      {{ data.category }}
-                    </q-item-label>
-                  </q-item-section> </q-item
-                ><q-item clickable v-ripple v-if="data.name">
-                  <q-item-section side>
-                    <q-icon name="event" size="xs" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>Idade</q-item-label>
-                    <q-item-label caption>
-                      {{ data.age }}
-                    </q-item-label>
-                  </q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section side>
-                    <q-icon name="location_on" size="xs" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>Localizacao</q-item-label>
-                    <q-item-label caption> Lar do Zola, Luanda </q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-              <q-list
-                bordered
-                padding
-                style="min-height: 180px"
-                class="q-mt-xs text-grey-8 bg-white rounded-borders"
-              >
-                <q-item>
-                  <q-item-section side>
-                    <q-icon name="assignment" size="xs" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>Descriçao</q-item-label>
-                    <q-item-label caption>
-                      {{ data.description }}
-                    </q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
+                  <q-item clickable v-ripple>
+                    <q-item-section side>
+                      <q-icon name="category" size="xs" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>Categoria</q-item-label>
+                      <q-item-label caption>
+                        {{ data.category }}
+                      </q-item-label>
+                    </q-item-section> </q-item
+                  ><q-item clickable v-ripple v-if="data.name">
+                    <q-item-section side>
+                      <q-icon name="event" size="xs" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>Idade</q-item-label>
+                      <q-item-label caption>
+                        {{ data.age }}
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                  <q-item>
+                    <q-item-section side>
+                      <q-icon name="location_on" size="xs" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>Localizacao</q-item-label>
+                      <q-item-label caption> Lar do Zola, Luanda </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+                <q-list
+                  bordered
+                  padding
+                  style="min-height: 180px"
+                  class="q-mt-xs text-grey-8 bg-white rounded-borders"
+                >
+                  <q-item>
+                    <q-item-section side>
+                      <q-icon name="assignment" size="xs" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>Descriçao</q-item-label>
+                      <q-item-label caption>
+                        {{ data.description }}
+                      </q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
               </div>
             </div>
           </div>
@@ -229,7 +234,7 @@
             >
               <q-tooltip> Mais detalhes </q-tooltip>
             </q-btn>
-            <div class="float-right text-caption q-mx-sm">4 years ago</div>
+            <div class="float-right text-caption q-mx-sm">22/05/2021</div>
           </div>
         </div>
       </div>
@@ -282,7 +287,7 @@ export default {
             color: "positive",
           });
           this.$emit("ok", null);
-          this.feedbackDone = true
+          this.feedbackDone = true;
         }, 2000);
       } catch (error) {
         this.$q.notify({

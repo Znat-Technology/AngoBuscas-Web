@@ -105,6 +105,7 @@ export const fetch = {
   watch: {
     searchPeopleOrDocument(newValue) {
       this.getInfoFromDB();
+      this.modelCategory = 'Todas categorias'
       if (this.searchPeopleOrDocument === "Documentos") {
         this.getType("Documento");
       } else {

@@ -42,7 +42,7 @@
     <!-- Divide em items procurados e anuncios -->
     <div class="row justify-center">
       <div class="col-sm-12 col-md-11 col-xs-12 col-lg-12 col-xl-12">
-        <q-carousel
+        <!--q-carousel
           v-if="!$q.screen.xs && modelSearch === ''"
           v-model="slideBanner"
           transition-prev="slide-right"
@@ -81,7 +81,7 @@
               </q-img>
             </div>
           </q-carousel-slide>
-        </q-carousel>
+        </q-carousel-->
         <div v-if="$q.screen.md || $q.screen.lg || $q.screen.xl">
           <div class="q-mt-md our-listing bgc-f7 pb30-991 pt100-360">
             <div class="container">

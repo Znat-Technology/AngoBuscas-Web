@@ -276,7 +276,8 @@
         </q-list>
 
         <!-- Label Separator -->
-        <q-list>
+<!--div>
+          <q-list>
           <q-separator inset></q-separator>
         </q-list>
         <q-list class="q-mt-md q-mb-sm q-ml-md">
@@ -284,21 +285,21 @@
             >Mais Pesquisados</q-item-label
           >
         </q-list>
+<q-list>
+      <q-item clickable v-ripple>
+        <q-item-section>
+          Cédula Pessoal
+        </q-item-section>
+      </q-item>
 
-        <!-- Mais Pesquisados -->
-        <q-list dense padding class="rounded-borders q-ml-md text-body2">
-          <q-item clickable v-ripple>
-            <q-item-section> Bilhete Identidade </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple>
-            <q-item-section> Carta de Condução </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple>
-            <q-item-section> Cedula Pessoal </q-item-section>
-          </q-item>
-        </q-list>
+     
+       
+    </q-list>
+</div-->
+           <div class="row text-grey-8 text-caption fixed-bottom justify-center">
+        <q-icon name="copyright" class="q-pb-sm q-px-sm" style="font-size: 1.5em;" />
+        <q-item-label class=" q-pr-lg">ANGOBUSCAS 2021</q-item-label>
+      </div>
       </q-scroll-area>
     </q-drawer>
 
@@ -376,7 +377,6 @@ export default {
         width: "5px",
         opacity: 0.8,
       },
-
       barStyle: {
         right: "2px",
         borderRadius: "9px",
